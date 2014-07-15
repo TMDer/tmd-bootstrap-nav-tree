@@ -1,9 +1,9 @@
 
 module = angular.module 'angularBootstrapNavTree',[]
 
-module.directive 'abnTree',['$timeout',($timeout)-> 
+module.directive 'abnTree',['$timeout',($timeout)->
   restrict:'E'
-  
+
   #templateUrl: '../dist/abn_tree_template.html' # <--- another way to do this
 
   template: """{html}""" # will be replaced by Grunt, during build, with the actual Template HTML
@@ -11,6 +11,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
   scope:
     treeData:'='
     onSelect:'&'
+    onMouseover:'&'
     initialSelection:'@'
     treeControl:'='
 
@@ -24,7 +25,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
 
     # default values ( Font-Awesome 3 or 4 or Glyphicons )
-    attrs.iconExpand   ?= 'icon-plus  glyphicon glyphicon-plus  fa fa-plus'    
+    attrs.iconExpand   ?= 'icon-plus  glyphicon glyphicon-plus  fa fa-plus'
     attrs.iconCollapse ?= 'icon-minus glyphicon glyphicon-minus fa fa-minus'
     attrs.iconLeaf     ?= 'icon-file  glyphicon glyphicon-file  fa fa-file'
 
@@ -47,8 +48,8 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
     #
     # internal utilities...
-    # 
-    for_each_branch = (f)->      
+    #
+    for_each_branch = (f)->
       do_f = (branch,level)->
         f(branch,level)
         if branch.children?
@@ -60,10 +61,10 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
 
 
-    
+
     #
     # only one branch can be selected at a time
-    # 
+    #
     selected_branch = null
     select_branch = (branch)->
 
@@ -106,6 +107,8 @@ module.directive 'abnTree',['$timeout',($timeout)->
       if branch isnt selected_branch
          select_branch(branch)
 
+    scope.user_mouseover_branch = (branch)->
+      scope.onMouseover({branch:branch})
 
     get_parent = (child)->
       parent = undefined
@@ -135,9 +138,9 @@ module.directive 'abnTree',['$timeout',($timeout)->
     #
     # We do this whenever data in the tree changes.
     # The tree itself is bound to this list.
-    # 
-    # Children of un-expanded parents are included, 
-    #  but are set to "visible:false" 
+    #
+    # Children of un-expanded parents are included,
+    #  but are set to "visible:false"
     #  ( and then they filtered out during rendering )
     #
     scope.tree_rows = []
@@ -164,7 +167,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
       #
       # if "children" is just a list of strings...
       # ...change them into objects:
-      # 
+      #
       for_each_branch (branch)->
         if branch.children
           if branch.children.length > 0
@@ -180,7 +183,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
         else
           branch.children = []
 
-      
+
       #
       # add_branch_to_list: recursively add one branch
       # and all of it's children to the list
@@ -195,13 +198,13 @@ module.directive 'abnTree',['$timeout',($timeout)->
         # they will be rendered like:
         # <i class="icon-plus"></i>
         #
-        if not branch.children or branch.children.length == 0 
+        if not branch.children or branch.children.length == 0
           tree_icon = attrs.iconLeaf
         else
           if branch.expanded
             tree_icon = attrs.iconCollapse
           else
-            tree_icon = attrs.iconExpand 
+            tree_icon = attrs.iconExpand
 
 
         #
@@ -223,7 +226,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
             # all branches are added to the list,
             #  but some are not visible
             # ( if parent is collapsed )
-            # 
+            #
             child_visible = visible and branch.expanded
             add_branch_to_list level+1, child, child_visible
 
@@ -231,7 +234,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
       # start with root branches,
       # and recursively add all children to the list
       #
-      for root_branch in scope.treeData        
+      for root_branch in scope.treeData
         add_branch_to_list 1, root_branch, true
 
 
@@ -267,7 +270,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
     # TREE-CONTROL : the API to the Tree
     #
     #  if we have been given an Object for this,
-    #  then we attach all of tree-control functions 
+    #  then we attach all of tree-control functions
     #  to that given object:
     #
     if scope.treeControl?
@@ -424,7 +427,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
               return next
 
 
-        tree.select_next_branch = (b)->          
+        tree.select_next_branch = (b)->
           b ?= selected_branch
           if b?
             next = tree.get_next_branch(b)
@@ -462,13 +465,3 @@ module.directive 'abnTree',['$timeout',($timeout)->
               tree.select_branch(prev)
               return prev
 ]
-
-
-
-
-
-
-
-
-
-
