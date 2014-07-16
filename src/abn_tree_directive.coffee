@@ -12,6 +12,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
     treeData:'='
     onSelect:'&'
     onMouseover:'&'
+    onPopover:'&'
     initialSelection:'@'
     treeControl:'='
 
@@ -109,6 +110,11 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
     scope.user_mouseover_branch = (branch)->
       scope.onMouseover({branch:branch})
+
+    scope.user_popover = (branch)->
+      console.log scope.onPopover({branch:branch})
+      return scope.onPopover({branch:branch})
+
 
     get_parent = (child)->
       parent = undefined

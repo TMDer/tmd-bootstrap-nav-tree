@@ -7,7 +7,7 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
     ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'')"
     )
 
-    a(ng-click="user_clicks_branch(row.branch)", ng-mouseover="user_mouseover_branch(row.branch)")
+    a(ng-click="user_clicks_branch(row.branch)", ng-mouseover="user_mouseover_branch(row.branch)", popover="{{user_popover(row.branch)}}", popover-trigger="mouseenter", popover-placement="right")
 
       i.indented.tree-icon(
         ng-class="row.tree_icon"
