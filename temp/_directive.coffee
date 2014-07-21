@@ -8,7 +8,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
   template: """
 <ul class="nav nav-list nav-pills nav-stacked abn-tree">
-  <li ng-repeat="row in tree_rows | filter:{visible:true} track by row.branch.uid" ng-animate="'abn-tree-animate'" ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'')" class="abn-tree-row"><a ng-click="user_clicks_branch(row.branch)" ng-mouseover="user_mouseover_branch(row.branch)" popover="{{user_popover(row.branch)}}" popover-trigger="mouseenter" popover-placement="right"><i ng-class="row.tree_icon" ng-click="row.branch.expanded = !row.branch.expanded" class="indented tree-icon"></i><span class="indented tree-label">{{ row.label }}</span></a></li>
+  <li ng-repeat="row in tree_rows | filter:{visible:true} track by row.branch.uid" ng-animate="'abn-tree-animate'" ng-class="['level-' + {{ row.level }} + (row.branch.selected ? ' active':''), (row.branch.disabled ? 'disabled': '')]" class="abn-tree-row"><a ng-click=" row.branch.disabled || user_clicks_branch(row.branch)" ng-mouseover="user_mouseover_branch(row.branch)" popover="{{user_popover(row.branch)}}" popover-trigger="mouseenter" popover-placement="right"><i ng-class="row.tree_icon" ng-click="row.branch.expanded = !row.branch.expanded" class="indented tree-icon"></i><span class="indented tree-label">{{ row.label }}</span></a></li>
 </ul>""" # will be replaced by Grunt, during build, with the actual Template HTML
   replace:true
   scope:
@@ -115,7 +115,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
       scope.onMouseover({branch:branch})
 
     scope.user_popover = (branch)->
-      console.log scope.onPopover({branch:branch})
       return scope.onPopover({branch:branch})
 
 

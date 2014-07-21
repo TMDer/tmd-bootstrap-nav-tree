@@ -112,7 +112,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
       scope.onMouseover({branch:branch})
 
     scope.user_popover = (branch)->
-      console.log scope.onPopover({branch:branch})
       return scope.onPopover({branch:branch})
 
 

@@ -4,10 +4,12 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
   li.abn-tree-row(
     ng-repeat='row in tree_rows | filter:{visible:true} track by row.branch.uid'
     ng-animate="'abn-tree-animate'"
-    ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'')"
+    ng-class="['level-' + {{ row.level }} + (row.branch.selected ? ' active':''), (row.branch.disabled ? 'disabled': '')]"
+
+
     )
 
-    a(ng-click="user_clicks_branch(row.branch)", ng-mouseover="user_mouseover_branch(row.branch)", popover="{{user_popover(row.branch)}}", popover-trigger="mouseenter", popover-placement="right")
+    a(ng-click=" row.branch.disabled || user_clicks_branch(row.branch)", ng-mouseover="user_mouseover_branch(row.branch)", popover="{{user_popover(row.branch)}}", popover-trigger="mouseenter", popover-placement="right")
 
       i.indented.tree-icon(
         ng-class="row.tree_icon"
