@@ -9,11 +9,11 @@ ul.nav.nav-list.nav-pills.nav-stacked.abn-tree
 
     )
 
-    a(ng-click=" row.branch.disabled || user_clicks_branch(row.branch)", ng-mouseover="user_mouseover_branch(row.branch)", popover="{{user_popover(row.branch)}}", popover-trigger="mouseenter", popover-placement="right")
+    a(ng-mouseover="user_mouseover_branch(row.branch)", popover="{{user_popover(row.branch)}}", popover-trigger="mouseenter", popover-placement="right")
 
       i.indented.tree-icon(
         ng-class="row.tree_icon"
         ng-click="row.branch.expanded = !row.branch.expanded"
         )
 
-      span.indented.tree-label {{ row.label }}
+      span.indented.tree-label(ng-click=" row.branch.disabled || user_clicks_branch(row.branch)") {{ row.label }}
