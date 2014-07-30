@@ -1,14 +1,14 @@
 
 module = angular.module 'angularBootstrapNavTree',[]
 
-module.directive 'abnTree',['$timeout',($timeout)->
+module.directive 'abnTree',['$timeout', "$document",($timeout, $document)->
   restrict:'E'
 
   #templateUrl: '../dist/abn_tree_template.html' # <--- another way to do this
 
   template: """
-<ul class="nav nav-list nav-pills nav-stacked abn-tree">
-  <li ng-repeat="row in tree_rows | filter:{visible:true} track by row.branch.uid" ng-animate="'abn-tree-animate'" ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'') + (row.branch.disabled ? ' disabled': '') " class="abn-tree-row"><a ng-mouseover="user_mouseover_branch(row.branch)" popover="{{user_popover(row.branch)}}" popover-trigger="mouseenter" popover-placement="right"><i ng-class="row.tree_icon" ng-click="row.branch.expanded = !row.branch.expanded" class="indented tree-icon"></i><span ng-click=" row.branch.disabled || user_clicks_branch(row.branch)" class="indented tree-label">{{ row.label }}</span></a></li>
+<ul ng-show="isVisible" class="nav nav-list nav-pills nav-stacked abn-tree">
+  <li ng-repeat="row in tree_rows | filter:{visible:true} track by row.branch.uid" ng-animate="'abn-tree-animate'" ng-class="'level-' + {{ row.level }} + (row.branch.selected ? ' active':'') + (row.branch.disabled ? ' disabled': '') " class="abn-tree-row"><a popover="{{user_popover(row.branch)}}" popover-trigger="mouseenter" popover-placement="right"><i ng-class="row.tree_icon" ng-click="row.branch.expanded = !row.branch.expanded" class="indented tree-icon"></i><span ng-click=" row.branch.disabled || user_clicks_branch(row.branch)" class="indented tree-label">{{ row.label }}</span></a></li>
 </ul>""" # will be replaced by Grunt, during build, with the actual Template HTML
   replace:true
   scope:
@@ -18,9 +18,27 @@ module.directive 'abnTree',['$timeout',($timeout)->
     onPopover:'&'
     initialSelection:'@'
     treeControl:'='
+    isVisible:'='
+    bindId:'@'
 
   link:(scope,element,attrs)->
 
+
+
+    $document.bind "click", (event) ->
+      isClickedElementChildOfPopup = element.find(event.target).length > 0
+      isClickedTargetElement = event.target.id is scope.bindId
+
+      if isClickedElementChildOfPopup || isClickedTargetElement
+        console.log "keep show"
+        return
+      else
+        console.log "hidden"
+        scope.isVisible = false
+        return
+
+
+      return
 
     error = (s) ->
       console.log 'ERROR:'+s

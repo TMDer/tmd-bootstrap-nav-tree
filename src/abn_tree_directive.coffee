@@ -1,7 +1,7 @@
 
 module = angular.module 'angularBootstrapNavTree',[]
 
-module.directive 'abnTree',['$timeout',($timeout)->
+module.directive 'abnTree',['$timeout', "$document",($timeout, $document)->
   restrict:'E'
 
   #templateUrl: '../dist/abn_tree_template.html' # <--- another way to do this
@@ -15,9 +15,22 @@ module.directive 'abnTree',['$timeout',($timeout)->
     onPopover:'&'
     initialSelection:'@'
     treeControl:'='
+    isVisible:'='
+    bindId:'@'
 
   link:(scope,element,attrs)->
 
+    $document.bind "click", (event) ->
+      isClickedElementChildOfPopup = element.find(event.target).length > 0
+      isClickedTargetElement = event.target.id is scope.bindId
+
+      if isClickedElementChildOfPopup || isClickedTargetElement
+        return
+      else
+        scope.isVisible = false
+        return
+
+      return
 
     error = (s) ->
       console.log 'ERROR:'+s
