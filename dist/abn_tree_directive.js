@@ -26,11 +26,10 @@
             isClickedElementChildOfPopup = element.find(event.target).length > 0;
             isClickedTargetElement = event.target.id === scope.bindId;
             if (isClickedElementChildOfPopup || isClickedTargetElement) {
-              console.log("keep show");
               return;
             } else {
-              console.log("hidden");
               scope.isVisible = false;
+              scope.$apply();
               return;
             }
           });

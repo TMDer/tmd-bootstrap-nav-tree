@@ -28,6 +28,7 @@ module.directive 'abnTree',['$timeout', "$document",($timeout, $document)->
         return
       else
         scope.isVisible = false
+        scope.$apply()
         return
 
       return

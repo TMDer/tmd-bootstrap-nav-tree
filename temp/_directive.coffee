@@ -23,20 +23,16 @@ module.directive 'abnTree',['$timeout', "$document",($timeout, $document)->
 
   link:(scope,element,attrs)->
 
-
-
     $document.bind "click", (event) ->
       isClickedElementChildOfPopup = element.find(event.target).length > 0
       isClickedTargetElement = event.target.id is scope.bindId
 
       if isClickedElementChildOfPopup || isClickedTargetElement
-        console.log "keep show"
         return
       else
-        console.log "hidden"
         scope.isVisible = false
+        scope.$apply()
         return
-
 
       return
 
