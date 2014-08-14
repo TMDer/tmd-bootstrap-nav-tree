@@ -75,18 +75,9 @@
           selected_branch = null;
           select_branch = function(branch) {
             if (!branch) {
-              if (selected_branch != null) {
-                selected_branch.selected = false;
-              }
-              selected_branch = null;
               return;
             }
             if (branch !== selected_branch) {
-              if (selected_branch != null) {
-                selected_branch.selected = false;
-              }
-              branch.selected = true;
-              selected_branch = branch;
               expand_all_parents(branch);
               if (branch.onSelect != null) {
                 return $timeout(function() {

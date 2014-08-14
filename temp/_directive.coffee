@@ -73,17 +73,17 @@ module.directive 'abnTree',['$timeout',($timeout)->
     select_branch = (branch)->
 
       if not branch
-        if selected_branch?
-          selected_branch.selected = false
-        selected_branch = null
+        # if selected_branch?
+        #   selected_branch.selected = false
+        # selected_branch = null
         return
 
       if branch isnt selected_branch
-        if selected_branch?
-          selected_branch.selected = false
-
-        branch.selected = true
-        selected_branch = branch
+        # if selected_branch?
+        #   selected_branch.selected = false
+        #
+        # branch.selected = true
+        # selected_branch = branch
         expand_all_parents(branch)
 
 
