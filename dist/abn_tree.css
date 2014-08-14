@@ -1,4 +1,4 @@
-/* 
+/*
    abn-tree.css
 
    style for the angular-bootstrap-nav-tree
@@ -39,16 +39,18 @@ li.abn-tree-row.ng-leave {
   opacity: 1;
 }
 .abn-tree-animate-leave.abn-tree-animate-leave-active,
-li.abn-tree-row.ng-leave-active {  
+li.abn-tree-row.ng-leave-active {
   height: 0px;
   max-height:0px;
   opacity: 0;
 }
 
 
-/* 
+
+
+/*
 ------------------------------------------
-Angular 1.2.0 Animation 
+Angular 1.2.0 Animation
 */
 
 
@@ -67,7 +69,7 @@ Angular 1.2.0 Animation
 -----------------------------------------
    begin normal css stuff
 */
-ul.abn-tree li.abn-tree-row {  
+ul.abn-tree li.abn-tree-row {
   padding: 0px;
   margin:0px;
 }
@@ -119,3 +121,11 @@ ul.nav.nav-list.abn-tree .level-9 .indented {
   position: relative;
   left: 160px;
 }
+
+
+/*.overlay {
+  z-index:50;
+  position: absolute;
+  background-color: white;
+  width: 100%;
+}*/
