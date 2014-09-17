@@ -26,6 +26,7 @@
             isClickedElementChildOfPopup = element.find(event.target).length > 0;
             isClickedTargetElement = event.target.id === scope.bindId;
             if (isClickedElementChildOfPopup || isClickedTargetElement) {
+              scope.isVisible = true;
               return;
             } else {
               scope.isVisible = false;
