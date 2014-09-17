@@ -27,6 +27,7 @@
             isClickedTargetElement = event.target.id === scope.bindId;
             if (isClickedElementChildOfPopup || isClickedTargetElement) {
               scope.isVisible = true;
+              scope.$apply();
               return;
             } else {
               scope.isVisible = false;
