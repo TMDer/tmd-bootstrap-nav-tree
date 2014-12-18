@@ -27,10 +27,11 @@
             isClickedTargetElement = event.target.id === scope.bindId;
             if (isClickedElementChildOfPopup || isClickedTargetElement) {
               scope.isVisible = true;
+              scope.$apply();
             } else if (scope.isVisible) {
               scope.isVisible = false;
+              scope.$apply();
             }
-            scope.$apply();
           });
           error = function(s) {
             console.log('ERROR:' + s);

@@ -29,11 +29,12 @@ module.directive 'abnTree',['$timeout', "$document",($timeout, $document)->
 
       if isClickedElementChildOfPopup || isClickedTargetElement
         scope.isVisible = true
+        scope.$apply()
       else if scope.isVisible
         scope.isVisible = false
+        scope.$apply()
 
 
-      scope.$apply()
 
       return
 
