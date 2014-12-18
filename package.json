@@ -1,7 +1,9 @@
 {
-  "name": "angular-bootstrap-nav-tree",
-  "version": "0.2.0",
-  "dependencies": {},
+  "name": "tmd-bootstrap-nav-tree",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2.18"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-coffee": "~0.7.0",
@@ -9,6 +11,18 @@
     "grunt-contrib-jade": "~0.8.0",
     "grunt-string-replace": "~0.2.7"
   },
+  "main": [
+    "dist/abn_tree.css",
+    "dist/abn_tree_directive.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "temp",
+    "tests"
+  ],
   "keywords":["angularjs","bootstrap","tree","widget"],
   "licence":"MIT"
 }
