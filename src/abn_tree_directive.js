@@ -341,7 +341,7 @@ module.directive('abnTree', [
               }
               if (b != null) {
                 siblings = tree.get_siblings(b);
-                n = siblings.length;
+                n = siblings.length - 1;
                 i = siblings.indexOf(b);
                 if (i < n) {
                   return siblings[i + 1];
@@ -353,11 +353,13 @@ module.directive('abnTree', [
               if (b == null) {
                 b = selected_branch;
               }
-              siblings = tree.get_siblings(b);
-              n = siblings.length;
-              i = siblings.indexOf(b);
-              if (i > 0) {
-                return siblings[i - 1];
+              if (b != null) {
+                siblings = tree.get_siblings(b);
+                n = siblings.length;
+                i = siblings.indexOf(b);
+                if (i > 0) {
+                  return siblings[i - 1];
+                }
               }
             };
             tree.select_next_sibling = function(b) {
