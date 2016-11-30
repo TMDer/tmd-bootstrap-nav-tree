@@ -341,7 +341,7 @@ module.directive('abnTree', [
               }
               if (b != null) {
                 siblings = tree.get_siblings(b);
-                n = siblings.length;
+                n = siblings.length - 1;
                 i = siblings.indexOf(b);
                 if (i < n) {
                   return siblings[i + 1];
